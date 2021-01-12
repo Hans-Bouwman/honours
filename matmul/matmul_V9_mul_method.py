@@ -45,6 +45,7 @@ class Matrix():
 
         # Create the representation.
         r = ""
+
         # Append the top.
         r += "┌" + " "*(sum(w)+2*len(w)) + "┐\n"
 
@@ -77,12 +78,13 @@ class Matrix():
         # Check if the width in matrix 'self' is equal to the height of matrix 'other'.
         if self.width != other.height:
             raise Exception("Dimension mismatch: width of matrix 'self' not equal to height of matrix 'other'.")
+        
         depth = self.width # other.height can also be used.
 
         # Initialise the output array with the correct dimensions.
         C = Matrix([[None for j in range(other.width)] for i in range(self.height)])
 
-        # Interate over each entry in 'C'.
+        # Iterate over each entry in 'C'.
         for i in range(self.height):
             for j in range(other.width):
                 # Sum over the product of the entries in A and B.
@@ -90,27 +92,6 @@ class Matrix():
 
         # Return the calculated matrix.
         return C
-
-    def __pow__(self, other):
-        # Type checking.
-        if type(other) is not int:
-            raise TypeError("Expected type 'int'.")
-
-        if not self.height == self.width:
-            raise Exception("Matrix must be square.")
-
-        result = identity(self.width) # self.height can also be used
-
-        for i in range(other):
-            result *= self
-
-        return result
-
-# Return the identity matrix of size 'n'.
-def identity(n):
-    return Matrix(
-        [[(1 if i == j else 0) for j in range(n)] for i in range(n)]
-    )
 
 # Test
 M1 = Matrix([
@@ -132,9 +113,7 @@ M3 = Matrix([
 ])
 
 M4 = Matrix([
-    [19, 20, 21]
+    [19, 20]
 ])
 
-M5 = M1 * M2 * M3 * M4
-
-print(M5 ** 2)
+print(M1 * M2 * M3 * M4)

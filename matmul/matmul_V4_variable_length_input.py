@@ -1,13 +1,15 @@
 # Matrix multiplication implementation with error checking and variable length input
+
+# ADDITION: variable input length function
 def matmul(*args):
-    # ADDITION: variable input length function
+
     # Return 'None' if no input is given (raising an error would also be appropriate).
     if len(args) == 0: return None
 
     # Reformat the input (necessary due to wrapping in a tuple by recursion).
     if len(args) == 1 and type(args[0] is tuple): args = args[0]
     
-    # Reworked type checking.
+    # CHANGE: Reworked type checking.
     for arg in args:
         if type(arg) is not list:
             raise TypeError("Expected type 'array'.")
@@ -37,12 +39,13 @@ def matmul(*args):
     # Check if the width in matrix 'A' is equal to the height of matrix 'B'.
     if A_width != B_height:
         raise Exception("Dimension mismatch: width of matrix 'A' not equal to height of matrix 'B'.")
+    
     depth = A_width # B_height can also be used.
 
     # Initialise the output array with the correct dimensions.
     C = [[None for j in range(B_width)] for i in range(A_height)]
 
-    # Interate over each entry in 'C'.
+    # Iterate over each entry in 'C'.
     for i in range(A_height):
         for j in range(B_width):
             # Sum over the product of the entries in A and B.

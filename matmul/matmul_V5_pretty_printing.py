@@ -1,6 +1,6 @@
 # Matrix multiplication implementation with error checking and variable length input
 def matmul(*args):
-    # Variable input length function
+    
     # Return 'None' if no input is given (raising an error would also be appropriate).
     if len(args) == 0: return None
 
@@ -37,12 +37,13 @@ def matmul(*args):
     # Check if the width in matrix 'A' is equal to the height of matrix 'B'.
     if A_width != B_height:
         raise Exception("Dimension mismatch: width of matrix 'A' not equal to height of matrix 'B'.")
+    
     depth = A_width # B_height can also be used.
 
     # Initialise the output array with the correct dimensions.
     C = [[None for j in range(B_width)] for i in range(A_height)]
 
-    # Interate over each entry in 'C'.
+    # Iterate over each entry in 'C'.
     for i in range(A_height):
         for j in range(B_width):
             # Sum over the product of the entries in A and B.
@@ -56,11 +57,11 @@ def printm(M):
     if type(M) is not list:
             raise TypeError("Expected type 'array'.")
 
-    # Find the matrices height and width (number of rows and number of columns).
+    # Find the matrices height and width (number of rows and number of columns) (borrowed).
     M_height = len(M)
     M_width = len(M[0])
 
-    # Check if the matrix is rectangular.
+    # Check if the matrix is rectangular (borrowed).
     for i in range(M_height):
         if len(M[i]) != M_width:
             raise Exception("Non-rectagular array 'A': not a matrix.")
@@ -75,15 +76,18 @@ def printm(M):
 
     # Print the matrix.
 
-    # Print the top.
+    # 1) Print the top.
     print("┌" + " "*(sum(W)+2*len(W)) + "┐")
-    # Print each row.
+    
+    # 2) Print each row.
     for i in range(M_height):
+
         # Print spacing between the lines.
         if i != 0:
             print("│" + " "*(sum(W)+2*len(W)) + "│")
         
         row = "│ "
+
         # Append each column
         for j in range(M_width):
             row += str(M[i][j]).ljust(W[j]+2)
@@ -91,7 +95,8 @@ def printm(M):
         row = row[:-1]
         row += "│"
         print(row)
-    # Print the bottom.
+
+    # 3) Print the bottom.
     print("└" + " "*(sum(W)+2*len(W)) + "┘")
 
 # Test

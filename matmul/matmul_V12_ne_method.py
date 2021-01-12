@@ -47,6 +47,7 @@ class Matrix():
 
         # Create the representation.
         r = ""
+
         # Append the top.
         r += "┌" + " "*(sum(w)+2*len(w)) + "┐\n"
 
@@ -84,7 +85,7 @@ class Matrix():
         # Initialise the output array with the correct dimensions.
         C = Matrix([[None for j in range(other.width)] for i in range(self.height)])
 
-        # Interate over each entry in 'C'.
+        # Iterate over each entry in 'C'.
         for i in range(self.height):
             for j in range(other.width):
                 # Sum over the product of the entries in A and B.
@@ -129,6 +130,10 @@ class Matrix():
         # If it passes all the checks
         return True
 
+    def __ne__(self, other):
+        # It's that easy.
+        return not self.__eq__(other)
+
 # Test
 M1 = Matrix([
     [1, 2],
@@ -154,4 +159,4 @@ M4 = Matrix([
 
 M5 = M1 * M2 * M3 * M4
 
-print(M1 * M2 * M3 * M4 == M5)
+print(M1 * M2 * M3 * M4 != M5)
